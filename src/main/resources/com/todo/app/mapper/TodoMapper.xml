@@ -20,20 +20,20 @@
   </select>
   
   <select id="jobselectTime" resultType="com.todo.app.entity.Todo">
-    select * from todo_items where done_flg = 0 order by time_limit asc
+    select * from job_items where done_flg = 0 order by time_limit asc
   </select>
   
   <select id="jobselectTitle" resultType="com.todo.app.entity.Todo">
-    select * from todo_items where done_flg = 0 order by title asc
+    select * from job_items where done_flg = 0 order by title asc
   </select>
 
   <select id="jobselectComplete" resultType="com.todo.app.entity.Todo">
-    select * from todo_items where done_flg = 1
+    select * from job_items where done_flg = 1
   </select>
 
   <insert id="add" parameterType="com.todo.app.entity.Todo">
-    insert into todo_items (title,time_limit)
-    values (#{title},to_date(#{time_limit},'yy-mm-dd'))
+    insert into todo_items (title,time_limit,priority)
+    values (#{title},to_date(#{time_limit},'yy-mm-dd'),#{priority})
   </insert>
 
   <update id="update" parameterType="com.todo.app.entity.Todo">
@@ -41,11 +41,30 @@
       title = #{title},
       time_limit = to_date(#{time_limit},'yy-mm-dd'),
       done_flg = #{done_flg}
+      priority = #{priority}
+      where id = #{id}
+  </update>
+  
+  <delete id="delete" parameterType="com.todo.app.entity.Todo">
+      delete from job_items where done_flg = 1
+  </delete>
+  
+  <insert id="jobadd" parameterType="com.todo.app.entity.Todo">
+    insert into job_items (title,time_limit,priority)
+    values (#{title},to_date(#{time_limit},'yy-mm-dd'),#{priority})
+  </insert>
+
+  <update id="jobupdate" parameterType="com.todo.app.entity.Todo">
+    update job_items set
+      title = #{title},
+      time_limit = to_date(#{time_limit},'yy-mm-dd'),
+      done_flg = #{done_flg}
+      priority = #{priority}
       where id = #{id}
   </update>
 
-  <delete id="delete" parameterType="com.todo.app.entity.Todo">
-      delete from todo_items where done_flg = 1
+  <delete id="jobdelete" parameterType="com.todo.app.entity.Todo">
+      delete from job_items where done_flg = 1
   </delete>
   
   

@@ -12,4 +12,5 @@ public class Todo {
     private String jobtitle;
     private int jobdone_flg;
     private String jobtime_limit;
+    private String priority;
 }

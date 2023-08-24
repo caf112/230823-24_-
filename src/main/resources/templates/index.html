@@ -5,6 +5,24 @@
 <title>TodoApp</title>
 </head>
 <body>
+	<style>
+	body {
+		font-family: Arial, sans-serif;
+		text-align: center;
+		background-color: rgb(139, 175, 180);
+	}
+	
+	input[type="submit"] {
+		background-color: #475B5A;
+		border-radius: 4px;
+		color: white;
+	}
+	
+	h1 {
+  		font-size: 70px;
+  		font-weight: 600;
+	}
+</style>
   <h1>TodoList</h1>
   <h4>private<h4>
   <form method="get" th:action="@{/job}">
@@ -13,18 +31,27 @@
   
   <h3>マイタスク</h3>
   <form method="get" th:action="@{/sort}">
-    <input type="submit" value="title" />
-  </form>
-  
-  <form method="get" th:action="@{/}">
-    <input type="submit" value="time" />
-  </form>
+	<label>
+		<input type="radio" name="sort" value="title"> タイトル順で並べ替え
+	</label>
+ 	<label>
+		 <input type="radio" name="sort" value="date"> 日付順で並べ替え
+	</label>
+	<input type="submit" value="Sort">
+
+</form>
   
   <form method="post" th:action="@{/update}" th:each="todo : ${todos}" >
     <input type="checkbox"name="done_flg" value="1"/>
     <input type="hidden" name="id" th:value="${todo.id}" />
     <input type="text" name="title"th:value="${todo.title}" />
     <input type="date" name="time_limit"th:value="${todo.time_limit}" />
+    <input type="radio"name="priority" value="P1" th:checked="${todo.priority == 'P1'}">
+	<label for="P1">高</lavel>
+	<input type="radio"name="priority" value="P2" th:checked="${todo.priority == 'P2'}">
+	<label for="P2">中</lavel>
+	<input type="radio"name="priority" value="P3" th:checked="${todo.priority == 'P3'}">
+	<label for="P3">低</lavel>
     <input type="submit" value="更新" />
   </form>
 
@@ -41,6 +68,12 @@
   <form method="post" th:action="@{/add}">
     <input type="text" name="title" />
     <input type="date" name="time_limit"/>
+    <input type="radio"name="priority" value="P1">
+	<label for="P1">高</lavel>
+	<input type="radio"name="priority" value="P2">
+	<label for="P2">中</lavel>
+	<input type="radio"name="priority" value="P3">
+	<label for="P3">低</lavel>
     <input type="submit" value="追加" />
   </form>
 

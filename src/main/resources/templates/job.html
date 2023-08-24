@@ -5,48 +5,82 @@
 <title>TodoApp</title>
 </head>
 <body>
+	<style>
+	body {
+		font-family: Arial, sans-serif;
+		text-align: center;
+		background-color: rgb(139, 175, 180);
+	}
+	
+	input[type="submit"] {
+		background-color: #475B5A;
+		border-radius: 4px;
+		color: white;
+	}
+	
+	h1 {
+  		font-size: 70px;
+  		font-weight: 600;
+	}
+</style>
   <h1>TodoList</h1>
-  <h4>job<h4>
+  <h4>private<h4>
   <form method="get" th:action="@{/}">
     <input type="submit" value="private" />
   </form>
   
   <h3>マイタスク</h3>
   <form method="get" th:action="@{/jobsort}">
-    <input type="submit" value="title" />
-  </form>
+	<label>
+		<input type="radio" name="sort" value="jobtitle"> タイトル順で並べ替え
+	</label>
+ 	<label>
+		 <input type="radio" name="sort" value="djobate"> 日付順で並べ替え
+	</label>
+	<input type="submit" value="Sort">
+
+</form>
   
-  <form method="get" th:action="@{/job}">
-    <input type="submit" value="time" />
-  </form>
-  
-  <form method="post" th:action="@{/jobupdate}" th:each="todo : ${todos}" >
+  <form method="post" th:action="@{/update}" th:each="todo : ${jobs}" >
     <input type="checkbox"name="done_flg" value="1"/>
-    <input type="hidden" name="id" th:value="${job.id}" />
-    <input type="text" name="title"th:value="${job.title}" />
-    <input type="date" name="time_limit"th:value="${job.time_limit}" />
+    <input type="hidden" name="id" th:value="${job?.id}" />
+    <input type="text" name="title"th:value="${job?.title}" />
+    <input type="date" name="time_limit"th:value="${todo.time_limit}" />
+    <input type="radio"name="priority" value="P1" th:checked="${job?.priority == 'P1'}">
+	<label for="P1">高</lavel>
+	<input type="radio"name="priority" value="P2" th:checked="${job?.priority == 'P2'}">
+	<label for="P2">中</lavel>
+	<input type="radio"name="priority" value="P3" th:checked="${job?.priority == 'P3'}">
+	<label for="P3">低</lavel>
     <input type="submit" value="更新" />
   </form>
 
   <h3>完了済み</h3>
-   <form method="post" th:action="@{/jobupdate}" th:each="todo : ${doneTodos}" >
+   <form method="post" th:action="@{/update}" th:each="todo : ${donejobs}" >
     <input type="checkbox"name="done_flg" value="1"/>
-    <input type="hidden" name="id" th:value="${todo.id}" />
-    <input type="text" name="title"th:value="${todo.title}" style="text-decoration:line-through"/>
-    <input type="date" name="time_limit"th:value="${todo.time_limit}" />
+    <input type="hidden" name="id" th:value="${job?.id}" />
+    <input type="text" name="title"th:value="${job?.title}" style="text-decoration:line-through"/>
+    <input type="date" name="time_limit"th:value="${job?.time_limit}" />
     <input type="submit" value="更新" />
   </form>
 
   <h3>新しいタスクを追加</h3>
-  <form method="post" th:action="@{/add}">
+  <form method="post" th:action="@{/jobadd}">
     <input type="text" name="title" />
     <input type="date" name="time_limit"/>
+    <input type="radio"name="priority" value="P1">
+	<label for="P1">高</lavel>
+	<input type="radio"name="priority" value="P2">
+	<label for="P2">中</lavel>
+	<input type="radio"name="priority" value="P3">
+	<label for="P3">低</lavel>
     <input type="submit" value="追加" />
   </form>
 
-  <form method="post" th:action="@{/delete}">
+  <form method="post" th:action="@{/jobdelete}">
     <input type="submit" value="完了済みを削除" />
   </form>
 
 </body>
 </html>
+

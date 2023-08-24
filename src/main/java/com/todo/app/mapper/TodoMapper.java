@@ -23,7 +23,7 @@ public interface TodoMapper {
 
     public List<Todo> jobselectComplete();
 
-    public void add(Todo job);
+    public void add(Todo todo);
     
     public void jobadd(Todo job);
 
@@ -32,5 +32,7 @@ public interface TodoMapper {
     public void jobupdate(Todo job);
 
     public void delete();
+    
+    public void jobdelete();
 }
 
