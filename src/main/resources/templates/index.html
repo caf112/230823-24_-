@@ -38,8 +38,7 @@
 		 <input type="radio" name="sort" value="date"> 日付順で並べ替え
 	</label>
 	<input type="submit" value="Sort">
-
-</form>
+   </form>
   
   <form method="post" th:action="@{/update}" th:each="todo : ${todos}" >
     <input type="checkbox"name="done_flg" value="1"/>

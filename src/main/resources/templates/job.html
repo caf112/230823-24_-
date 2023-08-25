@@ -24,7 +24,7 @@
 	}
 </style>
   <h1>TodoList</h1>
-  <h4>private<h4>
+  <h4>job<h4>
   <form method="get" th:action="@{/}">
     <input type="submit" value="private" />
   </form>
@@ -41,11 +41,11 @@
 
 </form>
   
-  <form method="post" th:action="@{/update}" th:each="todo : ${jobs}" >
+  <form method="post" th:action="@{/jobupdate}" th:each="job: ${jobs}" >
     <input type="checkbox"name="done_flg" value="1"/>
     <input type="hidden" name="id" th:value="${job?.id}" />
     <input type="text" name="title"th:value="${job?.title}" />
-    <input type="date" name="time_limit"th:value="${todo.time_limit}" />
+    <input type="date" name="time_limit"th:value="${job?.time_limit}" />
     <input type="radio"name="priority" value="P1" th:checked="${job?.priority == 'P1'}">
 	<label for="P1">高</lavel>
 	<input type="radio"name="priority" value="P2" th:checked="${job?.priority == 'P2'}">
@@ -56,7 +56,7 @@
   </form>
 
   <h3>完了済み</h3>
-   <form method="post" th:action="@{/update}" th:each="todo : ${donejobs}" >
+   <form method="post" th:action="@{/jobupdate}" th:each="job : ${donejobs}" >
     <input type="checkbox"name="done_flg" value="1"/>
     <input type="hidden" name="id" th:value="${job?.id}" />
     <input type="text" name="title"th:value="${job?.title}" style="text-decoration:line-through"/>
